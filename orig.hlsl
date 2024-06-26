@@ -372,24 +372,23 @@ float4 ps_main(float4 pos : SV_POSITION, float2 tex : TEXCOORD) : SV_TARGET
   float r = RESOLUTION.x/RESOLUTION.y;
   p.x *= r;
 
-  vec3 col = effect(p, pp);
+  vec3 finalColor = effect(p, pp);
 
-  vec4 fg = shaderTexture.Sample(samplerState, q);
+  vec4 terminalColor = shaderTexture.Sample(samplerState, q);
+  if(all(terminalColor.xyz == chromaKey))
+  // if(terminalColor.r == chromaKey.r && terminalColor.g == chromaKey.g && terminalColor.b == chromaKey.b)
+  {
+    return float4(0.05f, 0.0f, 0.0f, 0.05f);
+  }
   vec4 sh = shaderTexture.Sample(samplerState, q-2.0*unit2/RESOLUTION.xy);
   float4 imageColor = image.Sample(samplerState, tex);
-  col = mix(col, 0.0*unit3, sh.w);
-  col = mix(col, fg.xyz, fg.w);
+  finalColor = mix(finalColor, 0.0*unit3, sh.w);
+  finalColor = mix(finalColor, terminalColor.xyz, terminalColor.w);
 
 
 
 // INFO: Now I'm cooking here.
 // lerp texture.
-  // col = lerp(imageColor, col, 0.4);
-  if(col.r == chromaKey.r && col.g == chromaKey.g && col.b == chromaKey.b)
-  {
-    return float4(0.0f, 0.0f, 0.0f, 0.0f);
-  }
-  else{
-    return vec4(col, 0.0);
-  }
+  // finalColor = lerp(imageColor, finalColor, 0.4);
+  return vec4(finalColor, 0.0);
 }
