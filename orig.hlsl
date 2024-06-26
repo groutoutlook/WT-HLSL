@@ -376,7 +376,6 @@ float4 ps_main(float4 pos : SV_POSITION, float2 tex : TEXCOORD) : SV_TARGET
 
   vec4 terminalColor = shaderTexture.Sample(samplerState, q);
   if(all(terminalColor.xyz == chromaKey))
-  // if(terminalColor.r == chromaKey.r && terminalColor.g == chromaKey.g && terminalColor.b == chromaKey.b)
   {
     return float4(0.05f, 0.0f, 0.0f, 0.05f);
   }
