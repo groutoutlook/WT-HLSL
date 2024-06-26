@@ -379,6 +379,6 @@ float4 ps_main(float4 pos : SV_POSITION, float2 tex : TEXCOORD) : SV_TARGET
     return float4(0.0f, 0.0f, 0.0f, 0.0f);
   }
   else{
-    return vec4(col, 1.0);
+    return vec4(col, 0.0);
   }
 }
