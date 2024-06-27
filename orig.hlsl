@@ -57,7 +57,7 @@ static const vec4 unit4 = vec4(1.0, 1.0, 1.0, 1.0);
 #define PI_2        (0.5*3.141592654)
 #define TAU         (2.0*PI)
 #define ROT(a)      mat2(cos(a), sin(a), -sin(a), cos(a))
-
+// INFO: So bcol is the original color.
 static const vec3  bcol        = vec3(1.0, 0.15, 0.25)*sqrt(0.5);
 
 static const float logo_radius = 0.25;
@@ -369,8 +369,8 @@ float4 ps_main(float4 pos : SV_POSITION, float2 tex : TEXCOORD) : SV_TARGET
 #if defined(WINDOWS_TERMINAL)
   p.y = -p.y;
 #endif
-  float r = RESOLUTION.x/RESOLUTION.y;
-  p.x *= r;
+  float ratioLengthWidth = RESOLUTION.x/RESOLUTION.y;
+  p.x *= ratioLengthWidth;
 
   vec3 finalColor = effect(p, pp);
 
