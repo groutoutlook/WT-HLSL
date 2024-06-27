@@ -8,8 +8,13 @@ set windows-shell := ["pwsh.exe", "-NoLogo", "-Command"]
 hello:
     Write-Host "Hello, world!" -ForegroundColor Yellow
 
-sw:
+sw: 
     #!{{shebang}}
     Import-Module "$env:p7settingDir/quickTerminalAction"
     swapWtShader -
     Write-Host "Shader switched!" -ForegroundColor Green
+
+build: sw
+
+test:
+    echo "Nope"
