@@ -58,7 +58,7 @@ static const vec4 unit4 = vec4(1.0, 1.0, 1.0, 1.0);
 #define TAU         (2.0*PI)
 #define ROT(a)      mat2(cos(a), sin(a), -sin(a), cos(a))
 // INFO: So bcol is the original color.
-static const vec3  bcol        = vec3(1.0, 0.15, 0.25)*sqrt(0.5);
+static const vec3  bcol        = vec3(1.0, 0.27, 0.10)*sqrt(0.5);
 
 static const float logo_radius = 0.25;
 static const float logo_off    = 0.25;
